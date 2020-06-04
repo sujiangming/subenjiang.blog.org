@@ -94,7 +94,7 @@
 <meta property="og:description" content="目标利用HiveQL实现对电商日志的分析，求出topN商品的信息。 意义学会使用HiveQL对电商日志进行清洗和分析，用熟悉的SQL语句替代编写MapReduce程序。 环境本文所使用的环境如下：  CentOS7 Jdk-1.8.+ Hadoop-2.7.3 Hive-2.3.3  资源完成该案例演示所需资源如下：  测试数据源   文件名称：access.log  文件具体内容如下：   12">
 <meta property="og:image" content="http://yoursite.com/images/result.png">
 <meta property="article:published_time" content="2020-06-04T23:46:55.000Z">
-<meta property="article:modified_time" content="2020-06-04T16:48:02.596Z">
+<meta property="article:modified_time" content="2020-06-04T16:53:46.628Z">
 <meta property="article:author" content="Suben">
 <meta property="article:tag" content="Hadoop">
 <meta name="twitter:card" content="summary">
@@ -482,10 +482,11 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select uri,count(1) total from logs_ex group by uri order by total desc limit 3;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看结果</p>
+<p>  <img src="/images/result.png" alt="结果"></p>
 </li>
 </ul>
-<p><img src="/images/result.png" alt="结果"></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><pre><code>本文使用HiveQL简单实现了对电商日志的分析，其关键点在于了解如何分析日志的思路和方法，找到我们所需要的目标字段，然后根据日志的格式创建Hive外部表，最后通过编写SQL语句来实现。本文仅作为学习HiveQL来实现某一个应该场景而已。实际生产工作中，还要具体问题具体分析。祝各位读者道友们一切顺利~</code></pre>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本文使用HiveQL简单实现了对电商日志的分析，其关键点在于了解如何分析日志的思路和方法，找到我们所需要的目标字段，然后根据日志的格式创建Hive外部表，最后通过编写SQL语句来实现。本文仅作为学习HiveQL来实现某一个应该场景而已。实际生产工作中，还要具体问题具体分析。祝各位读者道友们一切顺利~</p>
+
       
     </div>
     
