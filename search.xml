@@ -145,4 +145,50 @@
         <tag>Hadoop</tag>
       </tags>
   </entry>
+  <entry>
+    <title>sqoop集成hive</title>
+    <url>/2020/06/06/sqoop%E9%9B%86%E6%88%90hive/</url>
+    <content><![CDATA[<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>使用sqoop来抽取MySQL中的数据到hive以及将hive的数据导出到MySQL表中。</p>
+<h1 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h1><ul>
+<li><p>sqoop导出hive表到MySQL中<br>  使用hive分析电商日志后，将其结果存储在hive的内部表中，即result表，然后通过sqoop将其结果抽取到MySQL数据库中的logs_result表</p>
+</li>
+<li><p>sqoop导入MySQL员工表数据到hive中<br>  将MySQL中的emp表导入到hive中</p>
+</li>
+</ul>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Hadoop-2.7.3</li>
+<li>Hive-2.3.3</li>
+<li>Sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz</li>
+<li>MySQL-5.7</li>
+</ul>
+<h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><ul>
+<li><p>sqoop导出hive表到MySQL中</p>
+<ul>
+<li><p>上传电商日志access.log到hdfs上的/datas/logs/目录下</p>
+<p><code>hdfs dfs -put access.log /datas/logs</code></p>
+</li>
+<li><p>创建hive外部表logs_ex关联到access.log</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create external table logs_ex(client_ip string,crossbar1 string,crossbar2 string,time string,time_sufix string,req string,url string,protocol string,status int,count int,crossbar3 string,user_agent string,crossbar4 string) row format delimited fields terminated by &#39; &#39; lines terminated by &#39;\n&#39; location &#39;&#x2F;datas&#x2F;logs&#39;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建hive的日志分析结果表result</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create table result(url string,total int) row format delimited fields terminated by &#39;\t&#39; lines terminated by &#39;\n&#39;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写SQL计算出排在前十的商品信息，并插入到hive的result表中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert into result(url,total) select * from (select url,count(1) total from logs_ex group by url order by total desc limit 10) as tmp;</span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>BigData</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
 </search>
