@@ -191,4 +191,25 @@
         <tag>Hadoop</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ORC简介</title>
+    <url>/2020/06/06/ORC%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h1 id="ORC官网介绍"><a href="#ORC官网介绍" class="headerlink" title="ORC官网介绍"></a>ORC官网介绍</h1><hr>
+<h2 id="ORC是什么"><a href="#ORC是什么" class="headerlink" title="ORC是什么"></a>ORC是什么</h2><pre><code>ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。
+
+ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快速查找所需行的支持。以柱状格式存储数据使阅读器只能读取、解压和处理当前查询所需的值。因为ORC文件可以识别类型，所以编写器会为类型选择最合适的编码，并在编写文件时构建一个内部索引。
+
+许多大型Hadoop用户已经采用ORC。例如，Facebook使用ORC在他们的数据仓库中保存了几十pb的数据，并证明ORC比RC文件或Parquet要快得多。雅虎使用ORC存储他们的生产数据，并发布了一些基准测试结果。
+
+ORC文件在默认情况下大约为64MB。文件中的条纹相互独立，形成分布式工作的自然单元。在每个条带中，列是彼此分开的，以便阅读器只能读取所需的列。</code></pre><h2 id="ORC的特点"><a href="#ORC的特点" class="headerlink" title="ORC的特点"></a>ORC的特点</h2><ul>
+<li>支持ACID</li>
+<li>内建索引</li>
+<li>类型感知</li>
+</ul>
+<hr>
+]]></content>
+      <tags>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
 </search>
