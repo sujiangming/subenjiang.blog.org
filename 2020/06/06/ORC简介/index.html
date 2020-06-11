@@ -86,14 +86,14 @@
 
 
 
-<meta name="description" content="ORC官网介绍 ORC是什么ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。  ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快">
+<meta name="description" content="ORC官网介绍ORC是什么ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。 ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快速查">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ORC简介">
 <meta property="og:url" content="http://www.sujiangming.com.cn/2020/06/06/ORC%E7%AE%80%E4%BB%8B/index.html">
 <meta property="og:site_name" content="若兰幽竹">
-<meta property="og:description" content="ORC官网介绍 ORC是什么ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。  ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快">
+<meta property="og:description" content="ORC官网介绍ORC是什么ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。 ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快速查">
 <meta property="article:published_time" content="2020-06-06T10:29:54.000Z">
-<meta property="article:modified_time" content="2020-06-06T02:51:43.285Z">
+<meta property="article:modified_time" content="2020-06-11T03:18:48.422Z">
 <meta property="article:author" content="若兰幽竹">
 <meta property="article:tag" content="Hadoop">
 <meta name="twitter:card" content="summary">
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  352
+                  351
                 </span>
               
 
@@ -424,19 +424,15 @@
       
 
       
-        <h1 id="ORC官网介绍"><a href="#ORC官网介绍" class="headerlink" title="ORC官网介绍"></a>ORC官网介绍</h1><hr>
-<h2 id="ORC是什么"><a href="#ORC是什么" class="headerlink" title="ORC是什么"></a>ORC是什么</h2><pre><code>ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。
-
-ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快速查找所需行的支持。以柱状格式存储数据使阅读器只能读取、解压和处理当前查询所需的值。因为ORC文件可以识别类型，所以编写器会为类型选择最合适的编码，并在编写文件时构建一个内部索引。
-
-许多大型Hadoop用户已经采用ORC。例如，Facebook使用ORC在他们的数据仓库中保存了几十pb的数据，并证明ORC比RC文件或Parquet要快得多。雅虎使用ORC存储他们的生产数据，并发布了一些基准测试结果。
-
-ORC文件在默认情况下大约为64MB。文件中的条纹相互独立，形成分布式工作的自然单元。在每个条带中，列是彼此分开的，以便阅读器只能读取所需的列。</code></pre><h2 id="ORC的特点"><a href="#ORC的特点" class="headerlink" title="ORC的特点"></a>ORC的特点</h2><ul>
+        <h1 id="ORC官网介绍"><a href="#ORC官网介绍" class="headerlink" title="ORC官网介绍"></a>ORC官网介绍</h1><h2 id="ORC是什么"><a href="#ORC是什么" class="headerlink" title="ORC是什么"></a>ORC是什么</h2><p>ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。</p>
+<p>ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快速查找所需行的支持。以柱状格式存储数据使阅读器只能读取、解压和处理当前查询所需的值。因为ORC文件可以识别类型，所以编写器会为类型选择最合适的编码，并在编写文件时构建一个内部索引。</p>
+<p>许多大型Hadoop用户已经采用ORC。例如，Facebook使用ORC在他们的数据仓库中保存了几十pb的数据，并证明ORC比RC文件或Parquet要快得多。雅虎使用ORC存储他们的生产数据，并发布了一些基准测试结果。</p>
+<p>ORC文件在默认情况下大约为64MB。文件中的条纹相互独立，形成分布式工作的自然单元。在每个条带中，列是彼此分开的，以便阅读器只能读取所需的列。</p>
+<h2 id="ORC的特点"><a href="#ORC的特点" class="headerlink" title="ORC的特点"></a>ORC的特点</h2><ul>
 <li>支持ACID</li>
 <li>内建索引</li>
 <li>类型感知</li>
 </ul>
-<hr>
 
       
     </div>
@@ -757,7 +753,7 @@ var jiathis_config={
    	黔ICP备 -
     <a target="_blank" href="http://www.beian.miit.gov.cn/"  rel="nofollow" style="color:#939393;" >20004827号</a> | <!--a标签中增加nofollow属性，避免爬虫出站。| -->
     <!-- <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52262402000114" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/source/images/beian.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">贵公网安备 52262402000114号</p></a>-->
-	  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52262402000114" style="color:#939393;;text-decoration:none;padding-left:30px;background:url(images/beian.png) no-repeat left center" rel="nofollow">贵公网安备 52262402000114号</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+	  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52262402000114" style="color:#939393;;text-decoration:none;padding-left:30px;background:url(http://www.sujiangming.com.cn/images/beian.png) no-repeat left center" rel="nofollow">贵公网安备 52262402000114号</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
 </div>
 <!-- 自己的公安备案号 
 <div style="width:300px;margin:0 auto; padding:20px 0;">

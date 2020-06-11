@@ -115,10 +115,8 @@
 <li><p>测试数据源</p>
 <p>  文件名称：access.log<br>  文件具体内容如下：</p>
   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89912 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89923 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89933 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89933 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89944 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89944 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89912 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89923 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89933 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br><span class="line">niit110,192.168.215.131 - - [28&#x2F;May&#x2F;2019:18:11:44 +0800] &quot;GET &#x2F;shop&#x2F;detail.html?id&#x3D;402857036a2831e001kshdksdsdk89933 HTTP&#x2F;1.0&quot; 200 4391 &quot;-&quot; &quot;ApacheBench&#x2F;2.3&quot; &quot;-&quot;</span><br></pre></td></tr></table></figure>
+
 </li>
-</ul>
-<ul>
-<li>连接工具<br>  putty</li>
 </ul>
 <h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><ul>
 <li><p>分析日志</p>
@@ -165,16 +163,24 @@
 <li><p>sqoop导出hive表到MySQL中</p>
 <ul>
 <li><p>上传电商日志access.log到hdfs上的/datas/logs/目录下</p>
-<p><code>hdfs dfs -put access.log /datas/logs</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hdfs dfs -put access.log &#x2F;datas&#x2F;logs</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建hive外部表logs_ex关联到access.log</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create external table logs_ex(client_ip string,crossbar1 string,crossbar2 string,time string,time_sufix string,req string,url string,protocol string,status int,count int,crossbar3 string,user_agent string,crossbar4 string) row format delimited fields terminated by &#39; &#39; lines terminated by &#39;\n&#39; location &#39;&#x2F;datas&#x2F;logs&#39;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建hive的日志分析结果表result</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create table result(url string,total int) row format delimited fields terminated by &#39;\t&#39; lines terminated by &#39;\n&#39;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">create table result(url string,total int) row format delimited fields terminated by &#39;\t&#39; lines terminated by &#39;\n&#39;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>编写SQL计算出排在前十的商品信息，并插入到hive的result表中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert into result(url,total) select * from (select url,count(1) total from logs_ex group by url order by total desc limit 10) as tmp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">insert into result(url,total) select * from (select url,count(1) total from logs_ex group by url order by total desc limit 10) as tmp;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
 
 
 
@@ -194,19 +200,15 @@
   <entry>
     <title>ORC简介</title>
     <url>/2020/06/06/ORC%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<h1 id="ORC官网介绍"><a href="#ORC官网介绍" class="headerlink" title="ORC官网介绍"></a>ORC官网介绍</h1><hr>
-<h2 id="ORC是什么"><a href="#ORC是什么" class="headerlink" title="ORC是什么"></a>ORC是什么</h2><pre><code>ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。
-
-ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快速查找所需行的支持。以柱状格式存储数据使阅读器只能读取、解压和处理当前查询所需的值。因为ORC文件可以识别类型，所以编写器会为类型选择最合适的编码，并在编写文件时构建一个内部索引。
-
-许多大型Hadoop用户已经采用ORC。例如，Facebook使用ORC在他们的数据仓库中保存了几十pb的数据，并证明ORC比RC文件或Parquet要快得多。雅虎使用ORC存储他们的生产数据，并发布了一些基准测试结果。
-
-ORC文件在默认情况下大约为64MB。文件中的条纹相互独立，形成分布式工作的自然单元。在每个条带中，列是彼此分开的，以便阅读器只能读取所需的列。</code></pre><h2 id="ORC的特点"><a href="#ORC的特点" class="headerlink" title="ORC的特点"></a>ORC的特点</h2><ul>
+    <content><![CDATA[<h1 id="ORC官网介绍"><a href="#ORC官网介绍" class="headerlink" title="ORC官网介绍"></a>ORC官网介绍</h1><h2 id="ORC是什么"><a href="#ORC是什么" class="headerlink" title="ORC是什么"></a>ORC是什么</h2><p>ORC是用于Hadoop工作负载的最小、最快的柱状存储。支持ACID事务和快照隔离，内建索引，支持所有的Hive类型，包括复合类型，如结构、列表、映射和联合等。目前可以用于Hive、Hadoop的MapRed、Hadoop的MapReduce以及Java等。</p>
+<p>ORC是一种自描述类型感知的柱状文件格式，专为Hadoop工作负载设计。它针对大型流读取进行了优化，但集成了快速查找所需行的支持。以柱状格式存储数据使阅读器只能读取、解压和处理当前查询所需的值。因为ORC文件可以识别类型，所以编写器会为类型选择最合适的编码，并在编写文件时构建一个内部索引。</p>
+<p>许多大型Hadoop用户已经采用ORC。例如，Facebook使用ORC在他们的数据仓库中保存了几十pb的数据，并证明ORC比RC文件或Parquet要快得多。雅虎使用ORC存储他们的生产数据，并发布了一些基准测试结果。</p>
+<p>ORC文件在默认情况下大约为64MB。文件中的条纹相互独立，形成分布式工作的自然单元。在每个条带中，列是彼此分开的，以便阅读器只能读取所需的列。</p>
+<h2 id="ORC的特点"><a href="#ORC的特点" class="headerlink" title="ORC的特点"></a>ORC的特点</h2><ul>
 <li>支持ACID</li>
 <li>内建索引</li>
 <li>类型感知</li>
 </ul>
-<hr>
 ]]></content>
       <tags>
         <tag>Hadoop</tag>

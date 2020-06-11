@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="若兰幽竹">
 <meta property="og:description" content="说明使用sqoop来抽取MySQL中的数据到hive以及将hive的数据导出到MySQL表中。 要求 sqoop导出hive表到MySQL中  使用hive分析电商日志后，将其结果存储在hive的内部表中，即result表，然后通过sqoop将其结果抽取到MySQL数据库中的logs_result表  sqoop导入MySQL员工表数据到hive中  将MySQL中的emp表导入到hive中">
 <meta property="article:published_time" content="2020-06-06T00:32:59.000Z">
-<meta property="article:modified_time" content="2020-06-05T16:49:14.881Z">
+<meta property="article:modified_time" content="2020-06-11T03:18:13.818Z">
 <meta property="article:author" content="若兰幽竹">
 <meta property="article:tag" content="Hadoop">
 <meta name="twitter:card" content="summary">
@@ -409,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  293
+                  295
                 </span>
               
 
@@ -463,16 +463,24 @@
 <li><p>sqoop导出hive表到MySQL中</p>
 <ul>
 <li><p>上传电商日志access.log到hdfs上的/datas/logs/目录下</p>
-<p><code>hdfs dfs -put access.log /datas/logs</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put access.log &#x2F;datas&#x2F;logs</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建hive外部表logs_ex关联到access.log</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create external table logs_ex(client_ip string,crossbar1 string,crossbar2 string,time string,time_sufix string,req string,url string,protocol string,status int,count int,crossbar3 string,user_agent string,crossbar4 string) row format delimited fields terminated by &#39; &#39; lines terminated by &#39;\n&#39; location &#39;&#x2F;datas&#x2F;logs&#39;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建hive的日志分析结果表result</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table result(url string,total int) row format delimited fields terminated by &#39;\t&#39; lines terminated by &#39;\n&#39;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">create table result(url string,total int) row format delimited fields terminated by &#39;\t&#39; lines terminated by &#39;\n&#39;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>编写SQL计算出排在前十的商品信息，并插入到hive的result表中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into result(url,total) select * from (select url,count(1) total from logs_ex group by url order by total desc limit 10) as tmp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">insert into result(url,total) select * from (select url,count(1) total from logs_ex group by url order by total desc limit 10) as tmp;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
 
 
 
@@ -805,7 +813,7 @@ var jiathis_config={
    	黔ICP备 -
     <a target="_blank" href="http://www.beian.miit.gov.cn/"  rel="nofollow" style="color:#939393;" >20004827号</a> | <!--a标签中增加nofollow属性，避免爬虫出站。| -->
     <!-- <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52262402000114" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/source/images/beian.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">贵公网安备 52262402000114号</p></a>-->
-	  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52262402000114" style="color:#939393;;text-decoration:none;padding-left:30px;background:url(images/beian.png) no-repeat left center" rel="nofollow">贵公网安备 52262402000114号</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+	  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52262402000114" style="color:#939393;;text-decoration:none;padding-left:30px;background:url(http://www.sujiangming.com.cn/images/beian.png) no-repeat left center" rel="nofollow">贵公网安备 52262402000114号</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
 </div>
 <!-- 自己的公安备案号 
 <div style="width:300px;margin:0 auto; padding:20px 0;">
